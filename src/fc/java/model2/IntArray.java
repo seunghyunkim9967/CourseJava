@@ -1,5 +1,7 @@
 package fc.java.model2;
 
+import java.util.Arrays;
+
 public class IntArray {
     private static final int DEFAULT_CAPACITY = 5; // 수정불가(final)=> 상수
     private int[] elements;
@@ -10,9 +12,19 @@ public class IntArray {
     }
     //저장
     public void add(int element){
+        if(size==elements.length){
+            //크기 2배로
+            ensureCapacity();
+        }
         // 크기체크
         elements[size++]=element;
     }
+
+    public void ensureCapacity() {
+        int newCapacity = elements.length*2;
+        elements = Arrays.copyOf(elements, newCapacity);
+    }
+
     // 얻음
     public int get(int index) { //-1, 5~
         // index 체크
